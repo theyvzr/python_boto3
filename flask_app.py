@@ -1,5 +1,8 @@
 from flask import Flask
 import boto3
+from config import config
+
+client = boto3.client()
 
 
 app = Flask(__name__)
