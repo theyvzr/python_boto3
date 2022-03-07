@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, make_response
+from config import config
 
 app = Flask(__name__)
 
@@ -30,4 +31,4 @@ def parse_json():
     return ""
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host=config["host"], port=config["port"], debug=True)
