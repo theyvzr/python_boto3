@@ -1,0 +1,9 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 926-940-314
+INFO:werkzeug:192.168.1.7 - - [08/Mar/2022 01:16:06] "[35m[1mPOST /hello/tahe?surname=yavuzer HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/Users/taheyavuzer/python_boto3/flask_app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 926-940-314
+INFO:werkzeug:192.168.1.7 - - [08/Mar/2022 01:18:07] "[35m[1mPOST /hello/tahe?surname=yavuzer HTTP/1.1[0m" 500 -
+INFO:root:dfjnsdfkfnekfsfvk
+INFO:werkzeug:192.168.1.7 - - [08/Mar/2022 01:18:27] "[35m[1mPOST /hello/tahe HTTP/1.1[0m" 500 -

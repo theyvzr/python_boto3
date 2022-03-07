@@ -1,7 +1,13 @@
 from flask import Flask, request, jsonify, make_response
 from config import config
+import logging
 
 app = Flask(__name__)
+
+logging.basicConfig(
+    filename=config['log_file'],
+    level=config['log_level']
+)
 
 #@app.route("/hello/<name>", methods=["GET", "POST"])
 #def hello_world_url_param(name):
@@ -18,6 +24,7 @@ def hello_world_url_param(name):
     surname = request.args.get("surname")
     if surname == None:
         surname = "Soyad Girilmedi!!!"
+        #logging.info("dfjnsdfkfnekfsfvk") loga root mesaj gönderir
     if request.method == "GET":
         return "Hello World"
     elif request.method == "POST":
