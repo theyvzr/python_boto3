@@ -8,20 +8,17 @@ client = boto3.client("ec2",
 )
 
 response = client.describe_instances(
-    Fliters=[
+    Filters=[
         {
             'Name': 'key-name',
             'Values': [
-                'BestCloud4Me'
+                'BestCloud4Me',
             ]
-        }
+        },
     ]
 )
 
-InstancesIds = []
-for instance in response["Reservations"][0]["Instances"]:
-    InstancesIds.append(instance["InstanceId"])
-
-response = client.start_instances(
-    InstancesIds=InstancesIds
-)
+print(response)
+#response = client.start_instances(
+#    InstancesIds=InstancesIds
+#)
