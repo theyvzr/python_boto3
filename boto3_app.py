@@ -10,7 +10,7 @@ aws_access_key_id=config["access_key"],
 response = client.describe_instances(
     Filters=[
         {
-            'Name': 'key-name',
+            'Name': 'tag:Name',
             'Values': [
                 'BestCloud4Me'
             ]
