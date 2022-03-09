@@ -18,13 +18,21 @@ response = client.describe_instances(
     ]
 )
 
-print(response["Reservations"][0])
-
-#print(response["Reservations"][0]["Instances"][0])
-
-#for instance in response["Reservations"][0]["Instances"]:
+#for instance in response["Reservations"][0]["Instances"]:              #list
 #    print(instance["InstanceId"])
 
+#InstanceIds = []
+#for instance in response["Reservations"][0]["Instances"]:              #start
+#    InstanceIds.append(instance["InstanceId"])
+#
 #response = client.start_instances(
-#    InstancesIds=InstancesIds
+#    InstanceIds=InstanceIds
 #)
+
+InstanceIds = []
+for instance in response["Reservations"][0]["Instances"]:
+    InstanceIds.append(instance["InstanceId"])
+
+response = client.stop_instances(
+    InstanceIds=InstanceIds
+)
