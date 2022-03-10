@@ -1,1 +1,4 @@
-Flask
+flask
+boto3
+config
+logging
