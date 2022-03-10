@@ -24,8 +24,8 @@ def function_list():
 
     if request.method == "GET":
         InstanceIds = []
-        for instance in response["Reservations"][0]["Instances"]:
-            InstanceIds.append(instance["InstanceId"])
+        for instance in range(len(response["Reservations"])):
+            InstanceIds.append(response["Reservations"][instance]["Instances"][0]["InstanceId"])
         return jsonify(InstanceIds=InstanceIds)
     elif request.method == "PATCH":
         return jsonify(response["Reservations"][0]["Instances"][0]["Placement"])
