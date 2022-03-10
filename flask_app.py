@@ -1,16 +1,13 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 import boto3
 from config import config
 import logging
 
 app = Flask(__name__)
 
-logging.basicConfig(
-    filename=config['log_file'],
-    level=config['log_level']
-)
+logging.basicConfig(filename=config["log_file"], level=config["log_level"])
 
-@app.route("/ec2/list", methods=["GET"])
+@app.route("/ec2/list", methods=["GET", "PATCH"])
 def function_list():
 
     access_key = request.args.get("access_key")
@@ -23,17 +20,16 @@ def function_list():
         region_name=f"{region}"
     )
 
-
     response = client.describe_instances()
 
-    try:
-        request.method == "GET"
+    if request.method == "GET":
         InstanceIds = []
         for instance in response["Reservations"][0]["Instances"]:
             InstanceIds.append(instance["InstanceId"])
         return jsonify(InstanceIds=InstanceIds)
-    except:
-        return "Wrong HTTP methods used!"
+    elif request.method == "PATCH":
+        return jsonify(response["Reservations"][0]["Instances"][0]["Placement"])
+
 
 @app.route("/ec2/start", methods=["POST"])
 def function_start():
@@ -51,8 +47,8 @@ def function_start():
 
     if request.method == "POST":
         response = client.start_instances(InstanceIds=[InstanceId])
-        return "Your instance has been started."
-
+        response_start = client.describe_instances()
+        return jsonify(response_start["Reservations"][0]["Instances"][0]["Tags"][0])
 
 @app.route("/ec2/stop", methods=["COPY"])
 def function_stop():
@@ -70,7 +66,8 @@ def function_stop():
 
     if request.method == "COPY":    
         response = client.stop_instances(InstanceIds=[InstanceId])
-        return "Your instance has been stopped."
+        response_stop = client.describe_instances()
+        return jsonify(OwnerId=response_stop["Reservations"][0]["OwnerId"])
 
 if __name__ == "__main__":
     app.run(host=config["host"], port=config["port"], debug=True)
