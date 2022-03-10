@@ -31,7 +31,7 @@ def function_list():
         InstanceIds = []
         for instance in response["Reservations"][0]["Instances"]:
             InstanceIds.append(instance["InstanceId"])
-        return jsonify(InstanceIds=InstanceIds), 200
+        return jsonify(InstanceIds=InstanceIds)
     except:
         return "Wrong HTTP methods used!"
 
@@ -51,7 +51,7 @@ def function_start():
 
     if request.method == "POST":
         response = client.start_instances(InstanceIds=[InstanceId])
-        return "Your instance has been started.", 200
+        return "Your instance has been started."
 
 
 @app.route("/ec2/stop", methods=["COPY"])
