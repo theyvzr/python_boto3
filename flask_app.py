@@ -1,11 +1,14 @@
 from flask import Flask, request, jsonify
 import boto3
-from config import config
 import logging
+from config import config
 
 app = Flask(__name__)
 
-logging.basicConfig(filename=config["log_file"], level=config["log_level"])
+logging.basicConfig(
+    filename=config['log_file'],
+    level=config['log_level']
+)
 
 @app.route("/ec2/list", methods=["GET", "PATCH"])
 def function_list():
