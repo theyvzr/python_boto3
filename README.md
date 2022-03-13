@@ -1,2 +1,2 @@
 # python_boto3
-Bestcloud Academy Python Application Development
+Bestcloud Academy Python Application Development Case Study

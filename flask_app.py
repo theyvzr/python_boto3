@@ -1,14 +1,16 @@
 from flask import Flask, request, jsonify
 import boto3
+from configparser import ConfigParser
+import os
 import logging
-from config import config
+
 
 app = Flask(__name__)
 
-logging.basicConfig(
-    filename=config['log_file'],
-    level=config['log_level']
-)
+dir_path = os.path.dirname(os.path.realpath(__file__))
+config = ConfigParser()
+config.read(f'{dir_path}/config.cfg')
+logging.basicConfig(filename=config['LOGGING']['log_file'], level=config['LOGGING']['log_level'])
 
 @app.route("/ec2/list", methods=["GET", "PATCH"])
 def function_list():
@@ -73,4 +75,4 @@ def function_stop():
         return jsonify(OwnerId=response_stop["Reservations"][0]["OwnerId"])
 
 if __name__ == "__main__":
-    app.run(host=config["host"], port=config["port"], debug=True)
+    app.run(host=config['APISERVER']['api_host'], port=config['APISERVER']['api_port'], debug=True)
